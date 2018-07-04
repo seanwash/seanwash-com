@@ -1,4 +1,4 @@
-const pkg = require('./package')
+require('dotenv').config()
 
 module.exports = {
   mode: 'universal',
@@ -7,13 +7,25 @@ module.exports = {
   ** Headers of the page
   */
   head: {
-    title: pkg.name,
+    title: 'Sean Washington',
     meta: [
       { charset: 'utf-8' },
+      {
+        name: 'google-site-verification',
+        content: process.env.G_VERIFICATION_TOKEN
+      },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: pkg.description }
+      {
+        hid: 'description',
+        name: 'description',
+        content: 'Podcaster, software engineer, regular human being.'
+      }
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+  },
+
+  env: {
+    GA_ID: process.env.GA_ID
   },
 
   /*
@@ -29,7 +41,7 @@ module.exports = {
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: [],
+  plugins: [{ src: '~plugins/ga.js', ssr: false }],
 
   /*
   ** Nuxt.js modules

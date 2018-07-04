@@ -1,10 +1,16 @@
 require('dotenv').config()
 
+const META = {
+  title: 'Sean Washington',
+  description: 'Podcaster, software engineer, regular human being.',
+  image: process.env.DOMAIN + '/og-image.jpg'
+}
+
 module.exports = {
   mode: 'universal',
 
   head: {
-    title: 'Sean Washington',
+    title: META.title,
     meta: [
       { charset: 'utf-8' },
       {
@@ -15,24 +21,47 @@ module.exports = {
       {
         hid: 'description',
         name: 'description',
-        content: 'Podcaster, software engineer, regular human being.'
+        content: META.description
       },
       {
         hid: 'og:description',
-        name: 'og:description',
-        content: 'Podcaster, software engineer, regular human being.'
+        property: 'og:description',
+        content: META.description
       },
       {
         hid: 'og:image',
-        name: 'og:image',
-        content: 'https://seanwash.com/og-image.jpg'
+        property: 'og:image',
+        content: META.image
+      },
+      {
+        hid: 'twitter:card',
+        property: 'twitter:card',
+        content: 'summary'
+      },
+      {
+        hid: 'twitter:title',
+        property: 'twitter:title',
+        content: META.title
+      },
+      {
+        hid: 'twitter:description',
+        property: 'twitter:description',
+        content: META.description
       }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.png' }]
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.png' },
+      {
+        rel: 'apple-touch-icon-precomposed',
+        sizes: '144x144',
+        href: '/apple-touch-icon.png'
+      }
+    ]
   },
 
   env: {
-    GA_ID: process.env.GA_ID
+    GA_ID: process.env.GA_ID,
+    DOMAIN: process.env.DOMAIN
   },
 
   loading: { color: '#000' },

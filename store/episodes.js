@@ -3,29 +3,27 @@ const SIMPLECAST_PODCAST_ID = process.env.SIMPLECAST_PODCAST_ID
 const SIMPLECAST_API_KEY = process.env.SIMPLECAST_API_KEY
 
 export const state = () => ({
-  all: []
+  all: [],
+  stats: {
+    total_listens: 400000
+  }
 })
 
-export const getters = {
-  getById: state => id => {
-    return state.all.find(episode => `${episode.id}` === id)
-  }
-}
+export const getters = {}
 
 export const mutations = {
-  replace(state, episodes) {
+  replaceEpisodes(state, episodes) {
     state.all = episodes
+  },
+
+  replaceStats(state, stats) {
+    state.stats = stats
   }
 }
 
 export const actions = {
-  fetchAll({ state, commit }) {
+  fetchEpisodes({ state, commit }) {
     return new Promise((resolve, reject) => {
-      if (state.all.length) {
-        resolve(state.all)
-        return
-      }
-
       let req = this.$axios.get(
         `${SIMPLECAST_API_URL}/podcasts/${SIMPLECAST_PODCAST_ID}/episodes.json?api_key=${SIMPLECAST_API_KEY}`
       )
@@ -37,7 +35,24 @@ export const actions = {
           return episode.published
         })
 
-        commit('replace', episodes.slice(0, 3))
+        commit('replaceEpisodes', episodes.slice(0, 3))
+        resolve(res.data)
+      })
+
+      req.catch(err => {
+        reject(err.response)
+      })
+    })
+  },
+
+  fetchStats({ state, commit }) {
+    return new Promise((resolve, reject) => {
+      let req = this.$axios.get(
+        `${SIMPLECAST_API_URL}/podcasts/${SIMPLECAST_PODCAST_ID}/statistics.json?api_key=${SIMPLECAST_API_KEY}`
+      )
+
+      req.then(res => {
+        commit('replaceStats', res.data)
         resolve(res.data)
       })
 

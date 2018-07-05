@@ -16,7 +16,7 @@
       <a href="https://dnc.show">Does Not Compute</a>
     </h2>
 
-    <p>By night I’m co-host of <a href="https://dnc.show">Does Not Compute</a>, a podcast where I talk with friends about the day to day lives of web developers. To date we’ve had over 500,000 listens in over 130 countries.</p>
+    <p>By night I’m co-host of <a href="https://dnc.show">Does Not Compute</a>, a podcast where I talk with friends about the day to day lives of web developers. To date we’ve had {{ totalListens }} listens in over 130 countries.</p>
 
     <recent-episodes />
 
@@ -40,8 +40,11 @@ export default {
     RecentEpisodes
   },
 
-  async fetch({ store, params }) {
-    await store.dispatch('episodes/fetchAll')
+  computed: {
+    totalListens() {
+      let listens = this.$store.state.episodes.stats.total_listens
+      return new Intl.NumberFormat().format(listens)
+    }
   }
 }
 </script>

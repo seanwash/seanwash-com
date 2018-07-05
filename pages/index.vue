@@ -1,5 +1,5 @@
 <docs>
-# ColophonPage
+# HomePage
 </docs>
 
 <template>

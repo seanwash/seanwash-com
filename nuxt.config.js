@@ -61,18 +61,17 @@ module.exports = {
 
   env: {
     GA_ID: process.env.GA_ID,
-    DOMAIN: process.env.DOMAIN
+    DOMAIN: process.env.DOMAIN,
+    SIMPLECAST_API_KEY: process.env.SIMPLECAST_API_KEY,
+    SIMPLECAST_API_URL: process.env.SIMPLECAST_API_URL,
+    SIMPLECAST_PODCAST_ID: process.env.SIMPLECAST_PODCAST_ID
   },
 
   loading: { color: '#000' },
 
   css: ['@/assets/css/poole.css', '@/assets/css/hyde.css'],
   plugins: [{ src: '~plugins/ga.js', ssr: false }],
-  modules: [
-    // Doc: https://github.com/nuxt-community/axios-module#usage
-    '@nuxtjs/axios',
-    '@nuxtjs/sitemap'
-  ],
+  modules: ['@nuxtjs/axios', '@nuxtjs/sitemap'],
 
   axios: {
     // See https://github.com/nuxt-community/axios-module#options

@@ -1,3 +1,4 @@
+const SIMPLECAST_API_URL = process.env.SIMPLECAST_API_URL
 const SIMPLECAST_PODCAST_ID = process.env.SIMPLECAST_PODCAST_ID
 const SIMPLECAST_API_KEY = process.env.SIMPLECAST_API_KEY
 
@@ -26,7 +27,7 @@ export const actions = {
       }
 
       let req = this.$axios.get(
-        `/podcasts/${SIMPLECAST_PODCAST_ID}/episodes.json?SIMPLECAST_API_KEY=${SIMPLECAST_API_KEY}`
+        `${SIMPLECAST_API_URL}/podcasts/${SIMPLECAST_PODCAST_ID}/episodes.json?api_key=${SIMPLECAST_API_KEY}`
       )
 
       req.then(res => {

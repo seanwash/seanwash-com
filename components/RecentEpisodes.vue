@@ -17,7 +17,7 @@
 
         <p>{{ episode.description }}</p>
 
-        <a :href="permalink(episode)">🎧 Listen</a>
+        <a :href="permalink(episode)">🎧 Listen Here</a>
       </li>
     </ul>
   </div>

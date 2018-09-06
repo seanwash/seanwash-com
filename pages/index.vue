@@ -41,7 +41,7 @@ export default {
   },
 
   computed: {
-    totalListens() {
+    totalListens () {
       let listens = this.$store.state.episodes.stats.total_listens
       return new Intl.NumberFormat().format(listens)
     }

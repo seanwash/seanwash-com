@@ -12,25 +12,24 @@ export const state = () => ({
 export const getters = {}
 
 export const mutations = {
-  replaceEpisodes(state, episodes) {
+  replaceEpisodes (state, episodes) {
     state.all = episodes
   },
 
-  replaceStats(state, stats) {
+  replaceStats (state, stats) {
     state.stats = stats
   }
 }
 
 export const actions = {
-  fetchEpisodes({ state, commit }) {
+  fetchEpisodes ({ state, commit }) {
     return new Promise((resolve, reject) => {
       let req = this.$axios.get(
         `${SIMPLECAST_API_URL}/podcasts/${SIMPLECAST_PODCAST_ID}/episodes.json?api_key=${SIMPLECAST_API_KEY}`
       )
 
       req.then(res => {
-        // TODO: Not sure how to get only published episodes from the API as
-        // there aren't any docs.
+        // TODO: Not sure how to get only published episodes from the API as there aren't any docs.
         let episodes = res.data.filter(episode => {
           return episode.published
         })
@@ -45,7 +44,7 @@ export const actions = {
     })
   },
 
-  fetchStats({ state, commit }) {
+  fetchStats ({ state, commit }) {
     return new Promise((resolve, reject) => {
       let req = this.$axios.get(
         `${SIMPLECAST_API_URL}/podcasts/${SIMPLECAST_PODCAST_ID}/statistics.json?api_key=${SIMPLECAST_API_KEY}`

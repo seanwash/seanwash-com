@@ -36,7 +36,7 @@ export default {
   },
 
   methods: {
-    permalink(episode) {
+    permalink (episode) {
       return `https://dnc.show/episodes/${episode.id}`
     }
   }
